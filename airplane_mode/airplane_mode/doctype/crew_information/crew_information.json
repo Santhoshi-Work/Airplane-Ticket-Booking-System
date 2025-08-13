@@ -1,32 +1,53 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-13 17:03:17.295554",
+ "autoname": "format:{full_name}-{designation}",
+ "creation": "2025-08-13 17:11:46.861325",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "shop_name",
-  "full_name"
+  "first_name",
+  "last_name",
+  "full_name",
+  "designation",
+  "contact"
  ],
  "fields": [
   {
-   "fieldname": "shop_name",
+   "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "Shop Name"
+   "label": "First Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
   },
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
    "label": "Full Name"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Select",
+   "label": "Designation",
+   "options": "Pilot\nCo-Pilot\nAir-Hostess"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-13 17:19:27.609063",
+ "modified": "2025-08-13 17:13:14.476633",
  "modified_by": "Administrator",
- "module": "Airport Shop Management",
- "name": "Rent Payment",
+ "module": "Airplane Mode",
+ "name": "Crew Information",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

@@ -7,7 +7,8 @@
  "allow_print": 0,
  "anonymous": 0,
  "apply_document_permissions": 0,
- "button_label": "Save",
+ "button_label": "BOOK",
+ "client_script": "frappe.web_form.after_load = () => {\n  const urlParams = new URLSearchParams(window.location.search);\n  const shop_id = urlParams.get(\"shop\");\n\n  if (shop_id) {\n    frappe.call({\n      method: \"frappe.client.get\",\n      args: {\n        doctype: \"Shop At Airport\",\n        name: shop_id, // This is doc.name, not shop_name\n      },\n      callback: function (r) {\n        if (!r.exc && r.message) {\n          const shop_data = r.message;\n\n          // Fill your Lease Shop form fields\n          frappe.web_form.set_value(\"shop_name\", shop_data.shop_name || \"\");\n        //   frappe.web_form.set_value(\"shop_number\", shop_data.shop_number || \"\");\n        //   frappe.web_form.set_value(\"area\", shop_data.area || 0);\n        //   frappe.web_form.set_value(\"monthly_rent\", shop_data.monthly_rent || 0);\n\n        //   // If you have a Link field in Lease Shop to reference Shop At Airport\n        //   frappe.web_form.set_value(\"shop_at_airport\", shop_id);\n        } else {\n          frappe.msgprint(\"Shop not found: \" + shop_id);\n        }\n      }\n    });\n  }\n\n\n//     frappe.call({\n//       method: \"frappe.client.get\",\n//       args: {\n//         doctype: \"Shop At Airport\",\n//         name: shop,\n//       },\n//       callback: function (r) {\n//         if (!r.exc && r.message) {\n//           const shop_data = r.message;\n//           frappe.web_form.set_value(\"monthly_rent\", shop_data.monthly_rent);\n//           frappe.web_form.set_value(\"area\", shop_data.area);\n//         }\n//       }\n//     });\n//   }\n\n  const disablePastDates = () => {\n    const leaseStart = document.querySelector('input[data-fieldname=\"lease_start_date\"]');\n    if (leaseStart) {\n      const today = new Date().toISOString().split(\"T\")[0];\n      leaseStart.setAttribute(\"min\", today);\n    } else {\n      setTimeout(disablePastDates, 200);\n    }\n  };\n  disablePastDates();\n\n  // Active validation + auto-calculation\n  frappe.web_form.on(\"lease_start_date\", (field, value) => {\n    if (value) {\n      const selected = frappe.datetime.str_to_obj(value);\n      const today = frappe.datetime.str_to_obj(frappe.datetime.get_today());\n\n      if (selected < today) {\n        frappe.msgprint(\"You cannot select a past date for lease start.\");\n        frappe.web_form.set_value(\"lease_start_date\", \"\");\n        frappe.web_form.set_value(\"lease_end_date\", \"\");\n        return;\n      }\n\n      // Add 1 year and set lease_end_date\n      const end = new Date(selected);\n      end.setFullYear(end.getFullYear() + 1);\n      const formatted = frappe.datetime.obj_to_str(end).split(\" \")[0];\n      frappe.web_form.set_value(\"lease_end_date\", formatted);\n    }\n  });\n};",
  "condition_json": "[]",
  "creation": "2025-08-13 16:12:08.544680",
  "doc_type": "Shop Lease Request",
@@ -20,7 +21,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2025-08-13 16:12:09.505634",
+ "modified": "2025-08-13 17:46:48.933631",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "shop-lead",
@@ -30,6 +31,8 @@
  "show_attachments": 0,
  "show_list": 0,
  "show_sidebar": 0,
+ "success_message": "THANK YOU FOR SENDING US BOOKING REQUEST . WE WILL CONTACT YOU SOON FOR CONFIRMATION",
+ "success_title": "LEASE REQUEST SENT",
  "title": "Shop Lead",
  "web_form_fields": [
   {

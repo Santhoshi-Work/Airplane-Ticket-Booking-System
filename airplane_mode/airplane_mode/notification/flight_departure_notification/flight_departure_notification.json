@@ -1,0 +1,35 @@
+{
+ "attach_print": 0,
+ "channel": "System Notification",
+ "condition": "doc.status==\"Scheduled\"",
+ "condition_type": "Python",
+ "creation": "2025-08-13 15:06:16.698005",
+ "date_changed": "date_of_departure",
+ "days_in_advance": 1,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Airplane Flight",
+ "enabled": 1,
+ "event": "Days Before",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Add your message here</p>\n",
+ "message_type": "Markdown",
+ "minutes_offset": 0,
+ "modified": "2025-08-13 15:10:03.766360",
+ "modified_by": "Administrator",
+ "module": "Airplane Mode",
+ "name": "Flight Departure Notification",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "System Manager"
+  },
+  {
+   "receiver_by_role": "Administrator"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "{{doc.name}} Is scheduled for {{doc.date_of_departure}}"
+}

@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/assets/airplane_mode/picnic.min.css">
+
+<h1>{{ shop.shop_name }}</h1>
+<p><strong>Airport:</strong> {{ shop.airport }}</p>
+<p><strong>Area (sq ft):</strong> {{ shop.area }}</p>
+<p><strong>Monthly Rent:</strong> ₹{{ shop.monthly_rent }}</p>
+<p><strong>Status:</strong> {{ shop.status }}</p>
+
+{% if shop.status == "Available" %}
+<a href="/shop-lead/new?shop={{ shop.name }}" class="button">Lease this Shop</a>
+{% else %}
+<p style="color:red;">This shop is currently occupied.</p>
+{% endif %}

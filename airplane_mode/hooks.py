@@ -13,6 +13,15 @@ fixtures = [
         "filters": {"enabled": 1}
     }
 ]
+doc_events = {
+    "Shop At Airport": {
+        "before_save": "airplane_mode.airport_shop_management.doctype.shop_at_airport.shop_at_airport.default_rent"
+        },
+    "Airplane Flight": {
+        "on_update": "airplane_mode.tasks.update_ticket_gates"
+     }  
+        }
+
 
 # Apps
 # ------------------

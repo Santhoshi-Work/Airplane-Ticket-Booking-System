@@ -15,18 +15,25 @@
   {
    "fieldname": "model",
    "fieldtype": "Data",
-   "label": "Model"
+   "in_list_view": 1,
+   "label": "Model",
+   "reqd": 1
   },
   {
    "fieldname": "airline",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Airline",
-   "options": "Airline"
+   "options": "Airline",
+   "reqd": 1
   },
   {
    "fieldname": "capacity",
    "fieldtype": "Int",
-   "label": "Capacity"
+   "in_list_view": 1,
+   "label": "Capacity",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "default": "0",
@@ -39,7 +46,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-13 13:57:06.457272",
+ "modified": "2025-08-18 10:17:43.286503",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane",

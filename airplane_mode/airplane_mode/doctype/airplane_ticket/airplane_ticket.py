@@ -24,19 +24,18 @@ class AirplaneTicket(Document):
 		self.add_ons = unique_add_ons
 		self.check_seat_availability()
 
-		# self.set_seat()
-		# self.seat=f"{random.randint(1,100)}{random.choice(['A','B','C','D','E'])}"
-	# self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
-	def before_insert(self):
+		self.set_seat()
+	# set seat function is for patch !!
+	def set_seat(self):
 		self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
 
-
+		# self.seat=f"{random.randint(1,100)}{random.choice(['A','B','C','D','E'])}"
+	# self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
 	def before_save(self):
-		self.cost=0
-		for item in self.add_ons:
-			self.cost+=item.amount or 0
-			self.total_amount=self.flight_price + (self.cost or 0) 
-
+		self.cost = sum([item.amount or 0 for item in self.add_ons])
+		self.total_amount = (self.flight_price or 0) + (self.cost or 0)
+	def before_insert(self):
+		self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
 	def before_submit(self):
 		if self.status!="Boarded":
 			frappe.throw(" STATUS SHOULD BE BOARDED")

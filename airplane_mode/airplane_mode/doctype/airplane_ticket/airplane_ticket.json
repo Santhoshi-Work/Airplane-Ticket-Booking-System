@@ -11,6 +11,8 @@
   "passenger",
   "source_airport_code",
   "seat",
+  "source_airport",
+  "destination_airport",
   "column_break_fhlz",
   "flight",
   "destination_airport_code",
@@ -24,7 +26,8 @@
   "departure_details_section",
   "departure_date",
   "departure_time",
-  "duration_of_flight"
+  "duration_of_flight",
+  "gate_number"
  ],
  "fields": [
   {
@@ -59,6 +62,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "seat",
    "fieldtype": "Data",
    "label": "Seat"
@@ -75,6 +79,7 @@
    "fieldname": "destination_airport_code",
    "fieldtype": "Data",
    "label": "Destination Airport Code",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -97,6 +102,7 @@
   {
    "fieldname": "departure_date",
    "fieldtype": "Date",
+   "in_standard_filter": 1,
    "label": "Departure Date",
    "reqd": 1
   },
@@ -138,13 +144,33 @@
    "fieldname": "departure_details_section",
    "fieldtype": "Section Break",
    "label": "Departure Details"
+  },
+  {
+   "fetch_from": "flight.source_airport",
+   "fieldname": "source_airport",
+   "fieldtype": "Data",
+   "label": "Source Airport ",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "flight.destination_airport",
+   "fieldname": "destination_airport",
+   "fieldtype": "Data",
+   "label": "Destination Airport",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "flight.gate_number",
+   "fieldname": "gate_number",
+   "fieldtype": "Data",
+   "label": "Gate Number"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-13 15:11:50.110603",
+ "modified": "2025-08-18 15:13:09.188480",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
@@ -217,5 +243,6 @@
    "color": "Green",
    "title": "Boarded"
   }
- ]
+ ],
+ "track_changes": 1
 }

@@ -1,1 +1,37 @@
-[]
+[
+ {
+  "description": "Food",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-08-14 15:34:48.207754",
+  "name": "3s2o5e924h"
+ },
+ {
+  "description": "Veg Meal",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-08-14 15:36:35.275986",
+  "name": "Veg Meal"
+ },
+ {
+  "description": "Non-Veg Meal",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-08-14 15:36:48.440748",
+  "name": "Non-Veg Meal"
+ },
+ {
+  "description": "Drinks",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-08-14 15:36:54.776257",
+  "name": "Drinks"
+ },
+ {
+  "description": "Premium Veg Meal",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-08-14 15:37:03.192431",
+  "name": "Premium Veg Meal"
+ }
+]

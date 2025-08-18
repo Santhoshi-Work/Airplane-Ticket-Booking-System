@@ -19,7 +19,8 @@
   "date_of_departure",
   "time_of_departure",
   "duration",
-  "crew_members"
+  "crew_members",
+  "gate_number"
  ],
  "fields": [
   {
@@ -114,6 +115,12 @@
    "fieldtype": "Table",
    "label": "Crew Members",
    "options": "Flight Crew Member"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gate_number",
+   "fieldtype": "Data",
+   "label": "Gate Number"
   }
  ],
  "grid_page_length": 50,
@@ -121,8 +128,13 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "is_published",
  "is_submittable": 1,
- "links": [],
- "modified": "2025-08-13 17:15:33.269187",
+ "links": [
+  {
+   "link_doctype": "Airplane Ticket",
+   "link_fieldname": "flight"
+  }
+ ],
+ "modified": "2025-08-18 14:44:11.223428",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",

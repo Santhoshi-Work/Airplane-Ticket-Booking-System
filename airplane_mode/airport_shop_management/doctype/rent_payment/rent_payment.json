@@ -5,25 +5,69 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "shop_name",
-  "full_name"
+  "lease_contract",
+  "tenant_name",
+  "date_of_payment",
+  "lease_start_date",
+  "lease_end_date",
+  "amount_paid",
+  "amended_from"
  ],
  "fields": [
   {
-   "fieldname": "shop_name",
-   "fieldtype": "Data",
-   "label": "Shop Name"
+   "fieldname": "date_of_payment",
+   "fieldtype": "Date",
+   "label": "Date of Payment"
   },
   {
-   "fieldname": "full_name",
-   "fieldtype": "Data",
-   "label": "Full Name"
+   "fetch_from": "lease_contract.lease_start_date",
+   "fieldname": "lease_start_date",
+   "fieldtype": "Date",
+   "label": "Lease Start Date",
+   "options": "Shop Lease Contract"
+  },
+  {
+   "fetch_from": "lease_contract.lease_end_date",
+   "fieldname": "lease_end_date",
+   "fieldtype": "Date",
+   "label": "Lease End Date "
+  },
+  {
+   "fieldname": "lease_contract",
+   "fieldtype": "Link",
+   "label": "Lease Contract",
+   "options": "Shop Lease Contract"
+  },
+  {
+   "fetch_from": "lease_contract.full_name",
+   "fieldname": "tenant_name",
+   "fieldtype": "Link",
+   "label": "Tenant Name",
+   "options": "Tenant Information"
+  },
+  {
+   "fetch_from": "lease_contract.total_rent",
+   "fieldname": "amount_paid",
+   "fieldtype": "Currency",
+   "label": "Amount Paid",
+   "options": "Shop Lease Contract"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rent Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-08-13 17:19:27.609063",
+ "modified": "2025-08-18 16:26:30.238004",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Rent Payment",

@@ -29,6 +29,13 @@ class ShopLeaseContract(Document):
             seen.add(item.shop)
 
     def on_submit(self):
+        if self.status == "Terminated":
+            for item in self.shops_leased:
+            # Get the linked Shop document
+                shop_doc = frappe.get_doc("Shop At Airport", item.shop)
+                shop_doc.shop_status = "Available"  # or whatever field tracks availability
+                shop_doc.save(ignore_permissions=True)
+
         current_status = frappe.db.get_value("Shop Lease Contract", self.name, "status") or "Draft"
         tenant_exists = frappe.db.exists("Tenant Information", {"email_id": self.email_id})
         if not tenant_exists:

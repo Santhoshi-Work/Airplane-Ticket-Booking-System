@@ -1,0 +1,40 @@
+{
+ "based_on": "",
+ "chart_name": "Shops Per Airport",
+ "chart_type": "Report",
+ "creation": "2025-08-19 10:52:40.019389",
+ "currency": "INR",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "modified": "2025-08-19 10:52:40.019389",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Shops Per Airport",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "parent_document_type": "",
+ "report_name": "Total Shops Per Airport",
+ "roles": [],
+ "show_values_over_chart": 0,
+ "source": "",
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "value_based_on": "",
+ "x_field": "airport",
+ "y_axis": [
+  {
+   "color": "#4F9DD9",
+   "y_field": "total_shops"
+  }
+ ]
+}

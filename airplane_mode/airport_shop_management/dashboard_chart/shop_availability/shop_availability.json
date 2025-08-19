@@ -1,0 +1,39 @@
+{
+ "chart_name": "Shop Availability",
+ "chart_type": "Report",
+ "creation": "2025-08-19 10:58:03.179204",
+ "currency": "INR",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "modified": "2025-08-19 10:58:26.498671",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "Shop Availability",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "Shop Availability Per Airport",
+ "roles": [],
+ "show_values_over_chart": 0,
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Pie",
+ "use_report_chart": 0,
+ "x_field": "airport",
+ "y_axis": [
+  {
+   "color": "#29CD42",
+   "y_field": "available_shops"
+  },
+  {
+   "color": "#CB2929",
+   "y_field": "occupied_shops"
+  }
+ ]
+}

@@ -17,6 +17,9 @@
   "flight",
   "destination_airport_code",
   "status",
+  "global_settings_section",
+  "payment_plan",
+  "ticket_payment_schedule",
   "section_break_mgby",
   "add_ons",
   "section_break_sqxs",
@@ -26,6 +29,7 @@
   "departure_details_section",
   "departure_date",
   "departure_time",
+  "column_break_ljgz",
   "duration_of_flight",
   "gate_number"
  ],
@@ -164,13 +168,35 @@
    "fieldname": "gate_number",
    "fieldtype": "Data",
    "label": "Gate Number"
+  },
+  {
+   "fieldname": "column_break_ljgz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "global_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Global Settings"
+  },
+  {
+   "fieldname": "payment_plan",
+   "fieldtype": "Select",
+   "label": "Payment Plan",
+   "options": "Full\nInstallments"
+  },
+  {
+   "fieldname": "ticket_payment_schedule",
+   "fieldtype": "Table",
+   "label": "Ticket Payment Schedule",
+   "options": "Airplane Ticket Payment Schedule",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 15:13:09.188480",
+ "modified": "2025-08-19 15:36:13.372870",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",

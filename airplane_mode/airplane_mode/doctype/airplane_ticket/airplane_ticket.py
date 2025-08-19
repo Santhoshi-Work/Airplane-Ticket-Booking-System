@@ -9,6 +9,7 @@ from frappe.model.document import Document
 import random
 import string
 from frappe import _, throw
+from .installments.gen_installments import create_payment_schedule
 
 
 class AirplaneTicket(Document):
@@ -23,6 +24,9 @@ class AirplaneTicket(Document):
 
 		self.add_ons = unique_add_ons
 		self.check_seat_availability()
+		create_payment_schedule(self)
+		print(self.ticket_payment_schedule)
+
 
 		self.set_seat()
 	# set seat function is for patch !!
@@ -39,6 +43,12 @@ class AirplaneTicket(Document):
 	def before_submit(self):
 		if self.status!="Boarded":
 			frappe.throw(" STATUS SHOULD BE BOARDED")
+		create_payment_schedule(self)
+			
+	# def on_submit(self):
+	# 	if not self.ticket_payment_schedule:
+	# 			create_payment_schedule(self)
+
 	def check_seat_availability(self):
 		if not self.flight:
 			return
@@ -58,7 +68,7 @@ class AirplaneTicket(Document):
 		"Airplane Ticket",
             {
                 "flight": self.flight,
-                "docstatus": ["<", 2],  # include Draft + Submitted, exclude Cancelled
+                "docstatus": ["<", 2],
                 "name": ["!=", self.name]  # exclude current unsaved doc
             }
         )

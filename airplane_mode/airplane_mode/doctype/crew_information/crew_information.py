@@ -6,4 +6,5 @@ from frappe.model.document import Document
 
 
 class CrewInformation(Document):
-	pass
+	def validate(self):
+		self.full_name = f"{self.first_name} {self.last_name}"

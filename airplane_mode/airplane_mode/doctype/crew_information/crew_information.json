@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{full_name}-{designation}",
+ "autoname": "format:{full_name}-{designation}-{###}",
  "creation": "2025-08-13 17:11:46.861325",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -16,7 +16,9 @@
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First Name"
+   "in_list_view": 1,
+   "label": "First Name",
+   "reqd": 1
   },
   {
    "fieldname": "last_name",
@@ -26,24 +28,28 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name"
+   "label": "Full Name",
+   "read_only": 1
   },
   {
    "fieldname": "designation",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Designation",
-   "options": "Pilot\nCo-Pilot\nAir-Hostess"
+   "options": "Pilot\nCo-Pilot\nAir-Hostess",
+   "reqd": 1
   },
   {
    "fieldname": "contact",
-   "fieldtype": "Data",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
    "label": "Contact"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-13 17:13:14.476633",
+ "modified": "2025-08-19 17:22:27.605565",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Crew Information",
@@ -66,5 +72,6 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "full_name"
 }

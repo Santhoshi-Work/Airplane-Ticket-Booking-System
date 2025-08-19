@@ -18,6 +18,7 @@
    "options": "Crew Information"
   },
   {
+   "fetch_from": "full_name.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -29,7 +30,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-13 17:14:50.688013",
+ "modified": "2025-08-19 17:17:46.585754",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Flight Crew Member",

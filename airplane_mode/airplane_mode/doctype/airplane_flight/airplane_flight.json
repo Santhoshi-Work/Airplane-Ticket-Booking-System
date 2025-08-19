@@ -11,16 +11,20 @@
   "airplane",
   "is_published",
   "route",
+  "column_break_ebuo",
   "status",
+  "gate_number",
+  "flight_details_section",
   "source_airport",
-  "destination_airport",
   "source_airport_code",
-  "destination_airport_code",
   "date_of_departure",
-  "time_of_departure",
   "duration",
-  "crew_members",
-  "gate_number"
+  "column_break_jila",
+  "destination_airport",
+  "destination_airport_code",
+  "time_of_departure",
+  "crew_details_section",
+  "crew_members"
  ],
  "fields": [
   {
@@ -121,6 +125,24 @@
    "fieldname": "gate_number",
    "fieldtype": "Data",
    "label": "Gate Number"
+  },
+  {
+   "fieldname": "column_break_ebuo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "flight_details_section",
+   "fieldtype": "Section Break",
+   "label": "Flight Details"
+  },
+  {
+   "fieldname": "column_break_jila",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "crew_details_section",
+   "fieldtype": "Section Break",
+   "label": "Crew Details"
   }
  ],
  "grid_page_length": 50,
@@ -134,7 +156,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2025-08-19 11:17:34.280837",
+ "modified": "2025-08-19 17:16:13.690147",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",

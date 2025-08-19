@@ -8,6 +8,8 @@
  "field_order": [
   "lease_contract",
   "tenant_name",
+  "month_of_payment",
+  "column_break_grub",
   "date_of_payment",
   "lease_start_date",
   "lease_end_date",
@@ -62,13 +64,25 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "month_of_payment",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Month of Payment",
+   "options": "Jan\nFeb\nMar\nApr\nMay\nJun\nJul\nAug\nSep\nOct\nNov\nDec",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_grub",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-19 12:11:34.322506",
+ "modified": "2025-08-19 12:44:40.078237",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Rent Payment",

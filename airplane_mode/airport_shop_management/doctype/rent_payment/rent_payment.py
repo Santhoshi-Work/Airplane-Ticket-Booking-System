@@ -86,9 +86,7 @@ def send_monthly_rent_reminders():
     if not shop_settings.enable_rent_reminders:
         return
 
-    today = nowdate()
-    month_start = get_first_day(today)
-    month_end = get_last_day(today)
+    current_month= frappe.utils.formatdate(frappe.utils.nowdate(), "MMM")
 
     # Get all active Lease Contracts
     contracts = frappe.get_all(
@@ -103,7 +101,7 @@ def send_monthly_rent_reminders():
             "Rent Payment",
             {
                 "lease_contract": contract["name"],
-                "posting_date": ["between", [month_start, month_end]],
+                "month_of_payment": current_month,
                 "docstatus": 1
             }
         )

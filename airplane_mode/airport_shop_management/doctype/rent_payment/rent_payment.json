@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{tenant_name}-{date_of_payment}",
  "creation": "2025-08-13 17:03:17.295554",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -67,10 +68,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-18 16:26:30.238004",
+ "modified": "2025-08-19 12:11:34.322506",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Rent Payment",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

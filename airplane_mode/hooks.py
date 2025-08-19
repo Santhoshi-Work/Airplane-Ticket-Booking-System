@@ -22,6 +22,12 @@ doc_events = {
      }  
         }
 
+scheduler_events = {
+    "daily": [  # every 1st of the month at 9:00 AM
+            "airplane_mode.airport_shop_management.doctype.rent_payment.rent_payment.send_monthly_rent_reminders"
+        ]
+    }
+
 
 # Apps
 # ------------------

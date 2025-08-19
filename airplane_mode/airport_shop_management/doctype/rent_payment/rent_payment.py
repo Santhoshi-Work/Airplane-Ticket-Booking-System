@@ -1,5 +1,7 @@
 import frappe
 from frappe.model.document import Document
+from frappe.utils import nowdate, get_first_day, get_last_day
+
 
 class RentPayment(Document):
 
@@ -37,7 +39,7 @@ class RentPayment(Document):
         """Send rent receipt email only if Shop Settings enable it"""
         # Get Shop Settings
         shop_settings = frappe.get_single("Shop Settings")
-        if not shop_settings.enable_rent_reminders:
+        if not shop_settings.enable_rent_receipts:
             return
 
         # Get tenant email from linked Lease Contract
@@ -73,3 +75,65 @@ class RentPayment(Document):
             reference_name=self.name
         )
         frappe.msgprint(f"Rent receipt emailed to {tenant_email}.")
+        
+
+
+def send_monthly_rent_reminders():
+    """Send rent reminders for all active lease contracts without payment this month"""
+
+    # Check Shop Settings toggle
+    shop_settings = frappe.get_single("Shop Settings")
+    if not shop_settings.enable_rent_reminders:
+        return
+
+    today = nowdate()
+    month_start = get_first_day(today)
+    month_end = get_last_day(today)
+
+    # Get all active Lease Contracts
+    contracts = frappe.get_all(
+        "Shop Lease Contract",
+        filters={"docstatus": 1},  # only submitted contracts
+        fields=["name", "full_name", "email_id"]
+    )
+
+    for contract in contracts:
+        # Check if Rent Payment exists for this contract in current month
+        rent_payment = frappe.db.exists(
+            "Rent Payment",
+            {
+                "lease_contract": contract["name"],
+                "posting_date": ["between", [month_start, month_end]],
+                "docstatus": 1
+            }
+        )
+
+        if rent_payment:
+            continue  # already paid → skip
+
+        # No payment found → send reminder
+        if contract["email_id"]:
+            send_rent_reminder_email(contract)
+        else:
+            frappe.log_error(f"No email for Lease Contract {contract.name}", "Rent Reminder Failed")
+
+
+def send_rent_reminder_email(contract):
+    frappe.sendmail(
+        recipients=[contract["email_id"]],
+        subject=f"Rent Reminder - {contract['name']}",
+        message=f"""
+            Dear {contract['full_name']},<br><br>
+            This is a kind reminder that your rent payment for <b>{frappe.utils.formatdate(frappe.utils.nowdate(), "MMMM YYYY")}</b> 
+            has not been received yet.<br><br>
+            Please make the payment at the earliest to avoid penalties.<br><br>
+            Regards,<br>
+            Airport Shop Management
+        """,
+        reference_doctype="Shop Lease Contract",
+        reference_name=contract["name"]
+    )
+    frappe.msgprint(f"Reminder sent to {contract['email_id']}")
+    print(f"✅ Reminder sent to {contract['email_id']} for contract {contract['name']}")
+
+

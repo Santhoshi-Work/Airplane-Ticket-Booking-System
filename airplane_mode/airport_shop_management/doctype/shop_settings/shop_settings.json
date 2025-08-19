@@ -6,7 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "default_rent_amount",
-  "enable_rent_reminders"
+  "enable_rent_reminders",
+  "enable_rent_receipts"
  ],
  "fields": [
   {
@@ -19,13 +20,19 @@
    "fieldname": "default_rent_amount",
    "fieldtype": "Currency",
    "label": "Default Rent Amount"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_rent_receipts",
+   "fieldtype": "Check",
+   "label": "Enable Rent Receipts"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-14 12:29:54.982653",
+ "modified": "2025-08-19 11:20:11.708207",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Shop Settings",

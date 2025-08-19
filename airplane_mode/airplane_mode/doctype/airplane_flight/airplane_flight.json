@@ -134,7 +134,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2025-08-18 14:44:11.223428",
+ "modified": "2025-08-19 11:17:34.280837",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",
@@ -197,7 +197,7 @@
    "share": 1
   }
  ],
- "route": "flights",
+ "route": "home/flights",
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",

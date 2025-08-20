@@ -21,7 +21,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2025-08-19 17:24:02.120495",
+ "modified": "2025-08-20 11:25:19.129538",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "shop-lead",
@@ -96,8 +96,8 @@
    "max_length": 0,
    "max_value": 0,
    "precision": "",
-   "read_only": 0,
-   "reqd": 1,
+   "read_only": 1,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {

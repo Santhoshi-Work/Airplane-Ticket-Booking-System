@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{full_name}-{designation}-{###}",
+ "autoname": "format:{designation}-{###}",
  "creation": "2025-08-13 17:11:46.861325",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -49,7 +49,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-19 17:22:27.605565",
+ "modified": "2025-08-19 17:37:38.512988",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Crew Information",

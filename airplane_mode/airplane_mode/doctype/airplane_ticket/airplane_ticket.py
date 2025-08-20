@@ -10,6 +10,7 @@ import random
 import string
 from frappe import _, throw
 from .installments.gen_installments import create_payment_schedule
+from .customer_conversion.customer import get_or_create_customer
 
 
 class AirplaneTicket(Document):
@@ -49,6 +50,36 @@ class AirplaneTicket(Document):
 	# def on_submit(self):
 	# 	if not self.ticket_payment_schedule:
 	# 			create_payment_schedule(self)
+
+	def on_submit(self):
+		passenger = frappe.get_doc("Flight Passenger", self.passenger)
+		customer_name = get_or_create_customer(passenger)
+		invoice = frappe.new_doc("Sales Invoice")
+		invoice.customer = customer_name
+		invoice.posting_date = frappe.utils.nowdate()
+		invoice.due_date = frappe.utils.add_days(invoice.posting_date, 7)
+		default_income_account = frappe.get_value(
+        "Company", self.company, "default_income_account"
+    ) or "Sales - NAV"
+		default_cost_center = frappe.get_value(
+        "Company", self.company, "cost_center"
+    ) or "Main - NAV"
+		
+		invoice.append("items", {
+            "item_name": f"Flight {self.flight} ({self.source_airport_code} → {self.destination_airport_code})",
+            "qty": 1,
+            "rate": self.total_amount,
+            "amount": self.total_amount,
+			"income_account": default_income_account,
+			"cost_center":default_cost_center
+        })
+
+		invoice.insert()
+		invoice.submit()
+
+		frappe.msgprint(f"ERPNext Invoice {invoice.name} created for ticket {self.name}")
+	
+
 
 	def check_seat_availability(self):
 		if not self.flight:

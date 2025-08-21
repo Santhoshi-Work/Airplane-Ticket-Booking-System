@@ -19,7 +19,7 @@ doc_events = {
         },
     "Airplane Flight": {
         "on_update": "airplane_mode.tasks.update_ticket_gates"
-     }  
+     }
         }
 
 scheduler_events = {

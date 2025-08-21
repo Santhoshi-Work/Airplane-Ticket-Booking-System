@@ -56,6 +56,7 @@ class AirplaneTicket(Document):
 		customer_name = get_or_create_customer(passenger)
 		invoice = frappe.new_doc("Sales Invoice")
 		invoice.customer = customer_name
+		invoice.custom_airplane_ticket = self.name
 		invoice.posting_date = frappe.utils.nowdate()
 		invoice.due_date = frappe.utils.add_days(invoice.posting_date, 7)
 		default_income_account = frappe.get_value(
@@ -68,8 +69,8 @@ class AirplaneTicket(Document):
 		invoice.append("items", {
             "item_name": f"Flight {self.flight} ({self.source_airport_code} → {self.destination_airport_code})",
             "qty": 1,
-            "rate": self.total_amount,
-            "amount": self.total_amount,
+            "rate": round(self.total_amount,2),
+            "amount": round(self.total_amount,2),
 			"income_account": default_income_account,
 			"cost_center":default_cost_center
         })
@@ -78,7 +79,72 @@ class AirplaneTicket(Document):
 		invoice.submit()
 
 		frappe.msgprint(f"ERPNext Invoice {invoice.name} created for ticket {self.name}")
-	
+
+		self.create_payment_entry_for_ticket(invoice)
+		frappe.msgprint(f"payment entry")
+
+	def create_payment_entry_for_ticket(self, invoice):
+		payment_entry = frappe.get_doc({
+        "doctype": "Payment Entry",
+        "payment_type": "Receive",
+        "party_type": "Customer",
+        "party": invoice.customer,
+        "posting_date": frappe.utils.nowdate(),
+        "mode_of_payment": "Cash",   # keep it or change to Cash if you want
+		"paid_to":"Cash - NAV",
+		"paid_to_account_currency": "INR",
+        "paid_amount": invoice.grand_total,
+        "received_amount": invoice.grand_total,
+		 "target_exchange_rate": 1.0,
+        "references": [
+            {
+                "reference_doctype": "Sales Invoice",
+                "reference_name": invoice.name,
+                "allocated_amount": invoice.grand_total
+            }
+        ]
+    })
+		payment_entry.insert(ignore_permissions=True)  
+		frappe.msgprint(f"Draft Payment Entry {payment_entry.name} created for Invoice {invoice.name}")
+
+	# def on_update(self):
+	# 	if self.status == "Paid":
+	# 		invoice_name = frappe.db.get_value(
+    #         "Sales Invoice", {"custom_airplane_ticket": self.name}
+    #     	)
+	# 		if invoice_name:
+	# 			exists = frappe.db.exists(
+    #             "Payment Entry",
+    #             {"reference_name": invoice_name, "docstatus": 1}
+    #         )
+	# 			if not exists:
+	# 				invoice = frappe.get_doc("Sales Invoice", invoice_name)
+	# 				paid_amount = invoice.grand_total
+	# 				pe = frappe.get_doc({
+    #                 "doctype": "Payment Entry",
+    #                 "payment_type": "Receive",
+    #                 "party_type": "Customer",
+    #                 "party": invoice.customer,
+    #                 "posting_date": frappe.utils.nowdate(),
+    #                 "mode_of_payment": "Cash",   # 👈 or Bank Draft if you prefer
+    #                 "paid_from": frappe.get_value("Company", self.company, "default_cash_account"),
+    #                 "paid_to": frappe.get_value("Company", self.company, "default_receivable_account"),
+    #                 "paid_amount": paid_amount,
+    #                 "received_amount": paid_amount,
+    #                 "reference_no": self.name,
+    #                 "reference_date": frappe.utils.nowdate(),
+    #                 "references": [{
+    #                     "reference_doctype": "Sales Invoice",
+    #                     "reference_name": invoice_name,
+    #                     "total_amount": paid_amount,
+    #                     "allocated_amount": paid_amount,
+    #                 }]
+    #             })
+	# 			pe.insert(ignore_permissions=True)
+	# 			pe.submit()
+	# 			frappe.db.commit()
+	# 			frappe.msgprint(f"Invoice {invoice_name} marked as Paid via Payment Entry {pe.name}")
+
 
 
 	def check_seat_availability(self):

@@ -1,0 +1,24 @@
+{
+ "content": null,
+ "creation": "2025-08-21 17:20:48.955095",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "",
+ "idx": 0,
+ "modified": "2025-08-21 17:33:22.605550",
+ "modified_by": "Administrator",
+ "module": "Airport Shop Management",
+ "name": "shop-details",
+ "owner": "Administrator",
+ "page_name": "shop-details",
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": ""
+}

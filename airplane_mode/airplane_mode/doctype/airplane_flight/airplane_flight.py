@@ -4,7 +4,6 @@ from frappe.website.website_generator import WebsiteGenerator
 
 class AirplaneFlight(WebsiteGenerator):
     def on_submit(self):
-        # safer than self.save()
         self.db_set("status", "Completed")
         
         tickets = frappe.get_all(
@@ -12,7 +11,7 @@ class AirplaneFlight(WebsiteGenerator):
             filters={"flight": self.name, "status": "Boarded", "docstatus": 0},
             fields=["name"],
         )
-        frappe.msgprint(f"Found {len(tickets)} ticket(s) to submit.")
+        frappe.msgprint(f"Found {len(tickets)} tickets to submit.")
 
         for ticket in tickets:
             try:
@@ -21,7 +20,6 @@ class AirplaneFlight(WebsiteGenerator):
                 frappe.msgprint(f"Could not submit ticket {ticket.name}: {e}")
 
     def on_update_after_submit(self):
-        """Only fire when doc is already submitted and updated"""
         self.enqueue_gate_update()
 
     def enqueue_gate_update(self):

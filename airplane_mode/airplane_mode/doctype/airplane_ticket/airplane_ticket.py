@@ -29,7 +29,7 @@ class AirplaneTicket(Document):
 		self.check_seat_availability()
 		create_payment_schedule(self)
 		print(self.ticket_payment_schedule)
-		self.set_seat()
+		#self.set_seat()
 		
 	# set seat function is for patch !!
 	def set_seat(self):
@@ -90,7 +90,7 @@ class AirplaneTicket(Document):
         "party_type": "Customer",
         "party": invoice.customer,
         "posting_date": frappe.utils.nowdate(),
-        "mode_of_payment": "Cash",   # keep it or change to Cash if you want
+        "mode_of_payment": "Cash", 
 		"paid_to":"Cash - NAV",
 		"paid_to_account_currency": "INR",
         "paid_amount": invoice.grand_total,

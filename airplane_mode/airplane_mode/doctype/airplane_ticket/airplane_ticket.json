@@ -70,7 +70,8 @@
    "allow_on_submit": 1,
    "fieldname": "seat",
    "fieldtype": "Data",
-   "label": "Seat"
+   "label": "Seat",
+   "read_only": 1
   },
   {
    "fieldname": "flight",
@@ -105,6 +106,7 @@
    "label": "Total Amount"
   },
   {
+   "fetch_from": "flight.date_of_departure",
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_standard_filter": 1,
@@ -112,12 +114,14 @@
    "reqd": 1
   },
   {
+   "fetch_from": "flight.time_of_departure",
    "fieldname": "departure_time",
    "fieldtype": "Time",
    "label": "Departure Time",
    "reqd": 1
   },
   {
+   "fetch_from": "flight.duration",
    "fieldname": "duration_of_flight",
    "fieldtype": "Duration",
    "label": "Duration of Flight",
@@ -204,7 +208,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-20 16:17:25.550366",
+ "modified": "2025-08-22 11:48:21.426774",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",

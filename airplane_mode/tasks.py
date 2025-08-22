@@ -2,7 +2,7 @@ import frappe
 def update_ticket_gates(doc, method):
     tickets = frappe.get_all(
         "Airplane Ticket",
-        filters={"flight": doc.name},  # use name, not the doc object
+        filters={"flight": doc.name}, 
         fields=["name"]
     )
 

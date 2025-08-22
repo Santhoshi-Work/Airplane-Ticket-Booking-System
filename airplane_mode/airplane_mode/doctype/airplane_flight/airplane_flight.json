@@ -156,7 +156,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2025-08-19 17:16:13.690147",
+ "modified": "2025-08-22 12:57:16.339221",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",
@@ -223,5 +223,14 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Orange",
+   "title": "Scheduled"
+  },
+  {
+   "color": "Green",
+   "title": "Completed"
+  }
+ ]
 }

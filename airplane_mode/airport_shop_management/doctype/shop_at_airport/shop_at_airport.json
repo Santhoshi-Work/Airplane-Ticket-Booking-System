@@ -91,7 +91,7 @@
  "is_published_field": "is_published",
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-13 16:46:39.751333",
+ "modified": "2025-08-22 14:51:17.774708",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Shop At Airport",
@@ -116,5 +116,14 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Available"
+  },
+  {
+   "color": "Purple",
+   "title": "Leased"
+  }
+ ]
 }

@@ -9,17 +9,20 @@ from frappe.model.document import Document
 from frappe.utils import getdate
 
 class ShopLeaseRequest(Document):
+    # def get_indicator(self):
+    #     if self.status == "Pending":
+    #         return ("Pending", "orange", "status,=,Pending")
+    #     elif self.status == "Approved":
+    #         return ("Approved", "green", "status,=,Approved")
+    #     elif self.status == "Rejected":
+    #         return ("Rejected", "red", "status,=,Rejected")
     
     def on_submit(self):
-        # Set status to Approved on submit
         self.status = "Approved"
         self.db_set("status", "Approved")
-
-        # Automatically create lease contract upon approval
         self.create_lease_contract_if_not_created()
 
     def create_lease_contract_if_not_created(self):
-        # Prevent duplicate contracts
         existing_contract = frappe.db.exists("Shop Lease Contract", {
             "full_name": self.full_name,
             "lease_start_date": self.lease_start_date
@@ -28,7 +31,6 @@ class ShopLeaseRequest(Document):
             frappe.msgprint("Lease Contract already exists.")
             return
 
-        # Generate a new name for the contract
         full_name = self.full_name.replace(" ", "-").lower()
         date_str = getdate(self.lease_start_date).strftime("%Y%m%d")
         base_name = f"LEASE-{full_name}-{date_str}"
@@ -39,7 +41,7 @@ class ShopLeaseRequest(Document):
             contract_name = f"{base_name}-{counter}"
             counter += 1
 
-        # Create the contract
+    
         lease_contract = frappe.new_doc("Shop Lease Contract")
         lease_contract.name = self.name
         lease_contract.full_name = self.full_name
@@ -53,7 +55,7 @@ class ShopLeaseRequest(Document):
 
         for item in self.shops_leased:
             if not frappe.db.exists("Shop At Airport", item.shop):
-                frappe.throw(f"🚫 Shop '{item.shop_name}' not found in Shop At Airport.")
+                frappe.throw(f"Shop '{item.shop_name}' not found in Shop At Airport.")
 
             shop_doc = frappe.get_doc("Shop At Airport", item.shop)
 
@@ -67,6 +69,6 @@ class ShopLeaseRequest(Document):
 
         try:
             lease_contract.insert(ignore_permissions=True)
-            frappe.msgprint(f"✅ Lease Contract {lease_contract.name} created successfully.")
+            frappe.msgprint(f"Lease Contract {lease_contract.name} created successfully.")
         except Exception as e:
             frappe.throw(f"Error creating contract: {e}")

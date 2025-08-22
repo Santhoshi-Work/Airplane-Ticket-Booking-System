@@ -35,21 +35,16 @@ class AirplaneTicket(Document):
 	def set_seat(self):
 		self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
 
-		# self.seat=f"{random.randint(1,100)}{random.choice(['A','B','C','D','E'])}"
-	# self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
-	# def before_save(self):
-	# 	self.cost = sum([item.amount or 0 for item in self.add_ons])
-	# 	self.total_amount = (self.flight_price or 0) + (self.cost or 0)
+
+
 	def before_insert(self):
 		self.seat = f"{random.randint(1, 100)}{random.choice(string.ascii_uppercase[:5])}"
+
+
 	def before_submit(self):
 		if self.status!="Boarded":
 			frappe.throw(" STATUS SHOULD BE BOARDED")
 		create_payment_schedule(self)
-			
-	# def on_submit(self):
-	# 	if not self.ticket_payment_schedule:
-	# 			create_payment_schedule(self)
 
 	def on_submit(self):
 		passenger = frappe.get_doc("Flight Passenger", self.passenger)
@@ -81,7 +76,6 @@ class AirplaneTicket(Document):
 		frappe.msgprint(f"ERPNext Invoice {invoice.name} created for ticket {self.name}")
 
 		self.create_payment_entry_for_ticket(invoice)
-		frappe.msgprint(f"payment entry")
 
 	def create_payment_entry_for_ticket(self, invoice):
 		payment_entry = frappe.get_doc({
@@ -151,23 +145,22 @@ class AirplaneTicket(Document):
 		if not self.flight:
 			return
 
-        # Get the flight document
 		flight = frappe.get_doc("Airplane Flight", self.flight)
 
-        # Get airplane and its capacity
+ 
 		if not flight.airplane:
 			frappe.throw(_("This flight has no airplane assigned."))
 		
 		airplane = frappe.get_doc("Airplane", flight.airplane)
 		capacity = airplane.capacity
 
-        # Count confirmed tickets for this flight (excluding current draft)
+   
 		ticket_count = frappe.db.count(
 		"Airplane Ticket",
             {
                 "flight": self.flight,
                 "docstatus": ["<", 2],
-                "name": ["!=", self.name]  # exclude current unsaved doc
+                "name": ["!=", self.name] 
             }
         )
 		if ticket_count >= capacity:
